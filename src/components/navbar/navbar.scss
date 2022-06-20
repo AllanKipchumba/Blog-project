@@ -1,0 +1,87 @@
+$themeColor: #00828c;
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 60px;
+    background-color: $themeColor;
+    color: #fff;
+    //
+    .social-media-links {
+        display: flex;
+        span {
+            padding: 0 8px;
+            cursor: pointer;
+        }
+    }
+    .nav-links {
+        display: flex;
+        //
+        li {
+            padding: 0 15px;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+    }
+    .icons {
+        display: flex;
+        //
+        span {
+            padding: 0 10px;
+        }
+    }
+    .mobile-menu-icon {
+        display: none;
+    }
+    // MOBILE VIEWPORT
+    @media screen and (max-width: 620px) {
+        .mobile-menu-icon {
+            display: block;
+            position: absolute;
+            font-size: 30px;
+            color: white;
+            background-color: #00828c;
+            border: none;
+            top: 15px;
+            right: 25px;
+        }
+        .social-media-links {
+            display: none;
+        }
+        .icons {
+            position: absolute;
+            right: 400px;
+            //
+        }
+        .nav-links {
+            visibility: hidden;
+        }
+        .nav-links-mobile {
+            position: absolute;
+            display: block;
+            list-style: none;
+            background-color: #005469;
+            text-align: center;
+            padding: 40px;
+            left: 0;
+            top: 44px;
+            height: fit-content;
+            transition: all 0.5s ease-out;
+            width: 50%;
+            left: 50%;
+        }
+        .nav-links-mobile>li {
+            padding: 20px;
+            border-bottom: 1px solid #00828c;
+            text-transform: capitalize;
+        }
+        .nav-links-mobile>li:hover {
+            background-color: #00828c;
+            border-radius: 20px;
+        }
+        .nav-links-mobile>li>.link {
+            color: #fff;
+            text-decoration: none;
+        }
+    }
+}
