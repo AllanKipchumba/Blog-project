@@ -12,8 +12,11 @@ import {
   FaInstagramSquare,
   FaUserAlt,
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
+
 const Navbar = () => {
   const [isMobile, setIsmobile] = useState(false);
+  const user = true;
 
   const handleClick = () => setIsmobile(false);
   return (
@@ -34,15 +37,38 @@ const Navbar = () => {
           </span>
         </div>
         <ul className={isMobile ? "nav-links-mobile" : "nav-links"}>
-          <li>home</li>
+          <li>
+            <Link to="/">home</Link>
+          </li>
           <li>about</li>
           <li>contact</li>
-          <li>write</li>
-          <li>logout</li>
+          <li>
+            <Link className="link" to="/write">
+              write
+            </Link>
+          </li>
+          {user && <li>logout</li>}
         </ul>
         <div className="icons">
           <span>
-            <FaUserAlt />
+            {user ? (
+              <Link className="link" to="/settings">
+                <FaUserAlt />
+              </Link>
+            ) : (
+              <ul className="topList">
+                <li className="topListItem">
+                  <Link className="link" to="/login">
+                    LOGIN
+                  </Link>
+                </li>
+                <li className="topListItem">
+                  <Link className="link" to="/register">
+                    REGISTER
+                  </Link>
+                </li>
+              </ul>
+            )}
           </span>
           <span>
             <AiOutlineSearch />
