@@ -9,18 +9,24 @@ import Write from "./pages/write.scss/Write";
 import { Routes, Route } from "react-router-dom";
 
 const App = () => {
-  const user = true;
+  const currentUser = true;
   return (
     <>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/single" element={<Single />} />
-        <Route path="/write" element={<Write />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/" element={<Home />} />
+        <Route path="/posts" element={<Home />} />
+        <Route path="/post/:id" element={<Single />} />
+        <Route path="/write" element={currentUser ? <Write /> : <Login />} />
+        <Route
+          path="/settings"
+          element={currentUser ? <Settings /> : <Login />}
+        />
+        <Route path="/login" element={currentUser ? <Home /> : <Login />} />
+        <Route
+          path="/register"
+          element={currentUser ? <Home /> : <Register />}
+        />
       </Routes>
     </>
   );

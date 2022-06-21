@@ -37,17 +37,17 @@ const Navbar = () => {
           </span>
         </div>
         <ul className={isMobile ? "nav-links-mobile" : "nav-links"}>
-          <li>
+          <li onClick={handleClick}>
             <Link to="/">home</Link>
           </li>
-          <li>about</li>
-          <li>contact</li>
-          <li>
+          {/* <li onClick={handleClick}>about</li>
+          <li onClick={handleClick}>contact</li> */}
+          <li onClick={handleClick}>
             <Link className="link" to="/write">
               write
             </Link>
           </li>
-          {user && <li>logout</li>}
+          {user && <li onClick={handleClick}>logout</li>}
         </ul>
         <div className="icons">
           <span>

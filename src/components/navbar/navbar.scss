@@ -68,16 +68,17 @@ $themeColor: #00828c;
             text-align: center;
             padding: 40px;
             left: 0;
-            top: 44px;
+            top: 60px;
             height: fit-content;
             transition: all 0.5s ease-out;
             width: 50%;
             left: 50%;
+            border-radius: 10px;
         }
         .nav-links-mobile>li {
             padding: 20px;
             border-bottom: 1px solid #00828c;
-            text-transform: capitalize;
+            text-transform: uppercase;
         }
         .nav-links-mobile>li:hover {
             background-color: #00828c;
