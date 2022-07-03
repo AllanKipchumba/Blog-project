@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./sidebar.scss";
 import { AiFillFacebook, AiFillTwitterSquare } from "react-icons/ai";
 import {
@@ -7,8 +7,18 @@ import {
   FaUserAlt,
 } from "react-icons/fa";
 import image from "./assets/image.jpg";
+import axios from "axios";
 
 const Sidebar = () => {
+  const [cats, setCats] = useState([]);
+
+  useEffect(() => {
+    const getCats = async () => {
+      const res = await axios.get("/categories");
+      console.log(res.data);
+    };
+    getCats();
+  }, []);
   return (
     <>
       <div className="sidebar">
