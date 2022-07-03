@@ -6,16 +6,19 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 
 const SinglePost = () => {
-  const location = useLocation();
   // access post id
+  const location = useLocation();
   const path = location.pathname.split("/")[2];
+
   const [post, setPost] = useState({});
+  const [owner, setOwner] = useState("");
 
   useEffect(() => {
     const fetchPost = async () => {
       const response = await axios.get("/posts/" + path);
-      // console.log(response.data);
-      setPost(response.data);
+      // console.log(response.data.post);
+      setPost(response.data.post);
+      setOwner(response.data.postOwner);
     };
     fetchPost();
   }, [path]);
@@ -27,7 +30,7 @@ const SinglePost = () => {
             <img src={post.post.photo} alt="/" className="image" />
           )}
           <h1>
-            {post.post.title}
+            {post.title}
             <div className="edit-btns">
               <FiEdit className="icon" />
               <BsTrash className="icon" />
@@ -35,11 +38,11 @@ const SinglePost = () => {
           </h1>
           <div className="post-info">
             <span>
-              Author: <span>{post.postOwner}</span>
+              Author: <span>{owner}</span>
             </span>
-            <span>{new Date(post.post.createdAt).toDateString()}</span>
+            <span>{new Date(post.createdAt).toDateString()}</span>
           </div>
-          <p>{post.post.description}</p>
+          <p>{post.description}</p>
         </div>
       </div>
     </>
