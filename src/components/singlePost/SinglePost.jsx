@@ -4,6 +4,7 @@ import { FiEdit } from "react-icons/fi";
 import { BsTrash } from "react-icons/bs";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const SinglePost = () => {
   // access post id
@@ -26,9 +27,7 @@ const SinglePost = () => {
     <>
       <div className="single-post">
         <div className="wrapper">
-          {post.photo && (
-            <img src={post.post.photo} alt="/" className="image" />
-          )}
+          {post.photo && <img src={post.photo} alt="/" className="image" />}
           <h1>
             {post.title}
             <div className="edit-btns">
@@ -37,9 +36,12 @@ const SinglePost = () => {
             </div>
           </h1>
           <div className="post-info">
-            <span>
-              Author: <span>{owner}</span>
-            </span>
+            <Link to={`/?author=${owner}`}>
+              <span>
+                Author: <span>{owner}</span>
+              </span>
+            </Link>
+
             <span>{new Date(post.createdAt).toDateString()}</span>
           </div>
           <p>{post.description}</p>
