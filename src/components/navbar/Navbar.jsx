@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isMobile, setIsmobile] = useState(false);
-  const user = true;
+  const user = false;
 
   const handleClick = () => setIsmobile(false);
   return (

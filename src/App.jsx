@@ -9,7 +9,7 @@ import Write from "./pages/write.scss/Write";
 import { Routes, Route } from "react-router-dom";
 
 const App = () => {
-  const currentUser = true;
+  const currentUser = false;
   return (
     <>
       <Navbar />

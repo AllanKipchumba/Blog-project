@@ -8,6 +8,7 @@ import {
 } from "react-icons/fa";
 import image from "./assets/image.jpg";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const [cats, setCats] = useState([]);
@@ -15,7 +16,7 @@ const Sidebar = () => {
   useEffect(() => {
     const getCats = async () => {
       const res = await axios.get("/categories");
-      console.log(res.data);
+      setCats(res.data);
     };
     getCats();
   }, []);
@@ -30,12 +31,11 @@ const Sidebar = () => {
         <div>
           <span>categories</span>
           <ul className="sidebar-list">
-            <li>life</li>
-            <li>music</li>
-            <li>style</li>
-            <li>sport</li>
-            <li>tech</li>
-            <li>cinema</li>
+            {cats.map((cat) => (
+              <Link to={`/?cat=${cat.name}`}>
+                <li key={cat._id}> {cat.name}</li>
+              </Link>
+            ))}
           </ul>
         </div>
         <div>
