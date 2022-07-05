@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import "./login.scss";
 import axios from "axios";
@@ -6,43 +6,34 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   loginStart,
   loginFail,
-  loginsyccess,
+  loginSuccess,
 } from "../../redux/slices/loginSlice";
 
 const Login = () => {
   // fetch data from redux store
   const loginState = useSelector((store) => store["loggedIn"]);
+  // access state
+  const { user, isFetching: loading, error } = loginState;
 
-  const { loginStatus } = loginState;
-  const disatch = useDispatch();
-
-  console.log(loginStatus);
-
+  const dispatch = useDispatch();
   const emailRef = useRef();
   const passwordRef = useRef();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(emailRef.current.value);
-    // setState((state.isFetching = true));
-    // console.log(state.isFetching);
-
+    dispatch(loginStart());
     try {
       const res = await axios.post("/auth/login", {
         email: emailRef.current.value,
         password: passwordRef.current.value,
       });
-      // setState((state.isFetching = false));
-      // console.log(state.isFetching);
-
-      // setState((state.user = res.data));
+      dispatch(loginSuccess(res.data));
     } catch (error) {
-      // setState((state.error = true));
-      // console.log(error.response.data);
+      dispatch(loginFail());
+      console.log(error);
     }
   };
-  // console.log(state.user);
-
+  console.log(loading);
   return (
     <>
       <div className="login">
