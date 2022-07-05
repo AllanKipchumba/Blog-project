@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./login.scss";
 import axios from "axios";
@@ -34,6 +34,12 @@ const Login = () => {
     }
   };
   console.log(loading);
+
+  // auto-focus email field
+  useEffect(() => {
+    emailRef.current.focus();
+  }, []);
+
   return (
     <>
       <div className="login">
