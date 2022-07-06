@@ -33,7 +33,7 @@ const Login = () => {
       console.log(error);
     }
   };
-  console.log(loading);
+  console.log(user);
 
   // auto-focus email field
   useEffect(() => {
