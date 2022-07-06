@@ -10,9 +10,8 @@ import { Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const App = () => {
-  // accesing state
-  const loginState = useSelector((store) => store["loggedIn"]);
-  const { user } = loginState;
+  // accesing user state in store
+  const { user } = useSelector((store) => store["loggedIn"]);
 
   return (
     <>

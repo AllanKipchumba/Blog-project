@@ -13,10 +13,13 @@ import {
   FaUserAlt,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [isMobile, setIsmobile] = useState(false);
-  const user = false;
+
+  // accesing user state in store
+  const { user } = useSelector((store) => store["loggedIn"]);
 
   const handleClick = () => setIsmobile(false);
   return (
@@ -36,6 +39,7 @@ const Navbar = () => {
             <FaInstagramSquare />
           </span>
         </div>
+
         <ul className={isMobile ? "nav-links-mobile" : "nav-links"}>
           <li onClick={handleClick}>
             <Link to="/">home</Link>
@@ -49,6 +53,7 @@ const Navbar = () => {
           </li>
           {user && <li onClick={handleClick}>logout</li>}
         </ul>
+
         <div className="icons">
           <span>
             {user ? (
