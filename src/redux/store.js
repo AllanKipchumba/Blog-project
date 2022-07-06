@@ -1,8 +1,7 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from "./rootReducer";
-import logInreducer from "./slices/loginSlice";
 
-// configuring redux persist
+// configuring redux-persist
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";

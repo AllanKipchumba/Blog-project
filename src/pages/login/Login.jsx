@@ -12,6 +12,7 @@ import {
 const Login = () => {
   // fetch data from redux store
   const loginState = useSelector((store) => store["loggedIn"]);
+
   // access state
   const { user, isFetching: loading, error } = loginState;
 
@@ -22,17 +23,20 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(loginStart());
+
     try {
       const res = await axios.post("/auth/login", {
         email: emailRef.current.value,
         password: passwordRef.current.value,
       });
+
       dispatch(loginSuccess(res.data));
     } catch (error) {
       dispatch(loginFail());
       console.log(error);
     }
   };
+
   console.log(user);
 
   // auto-focus email field
@@ -62,7 +66,7 @@ const Login = () => {
             ref={passwordRef}
           />
 
-          <button type="submit" className="loginButton">
+          <button type="submit" className="loginButton" disabled={loading}>
             Login
           </button>
 
