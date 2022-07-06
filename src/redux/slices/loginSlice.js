@@ -20,9 +20,15 @@ const loggedInSlice = createSlice({
         loginFail: (state, action) => {
             state.error = true;
         },
+        logout: (state, action) => {
+            state.user = null;
+            state.isFetching = false;
+            state.error = false;
+        },
     },
 });
 // export actions
-export const { loginStart, loginFail, loginSuccess } = loggedInSlice.actions;
+export const { loginStart, loginFail, loginSuccess, logout } =
+loggedInSlice.actions;
 // axport reducer
 export default loggedInSlice.reducer;

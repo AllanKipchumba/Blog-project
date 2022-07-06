@@ -14,14 +14,18 @@ import {
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { logout } from "../../redux/slices/loginSlice";
+import { useDispatch } from "react-redux";
 
 const Navbar = () => {
   const [isMobile, setIsmobile] = useState(false);
+  const dispatch = useDispatch();
 
   // accesing user state in store
   const { user } = useSelector((store) => store["loggedIn"]);
 
   const handleClick = () => setIsmobile(false);
+
   return (
     <>
       <nav className="navbar">
@@ -51,7 +55,17 @@ const Navbar = () => {
               write
             </Link>
           </li>
-          {user && <li onClick={handleClick}>logout</li>}
+          {user && (
+            <li
+              onClick={() => {
+                handleClick();
+                // trigger logout action in store
+                dispatch(logout());
+              }}
+            >
+              logout
+            </li>
+          )}
         </ul>
 
         <div className="icons">
