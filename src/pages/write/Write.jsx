@@ -8,6 +8,7 @@ const Write = () => {
   const [title, seTitle] = useState("");
   const [description, setDescription] = useState("");
   const { user } = useSelector((store) => store["loggedIn"]);
+  // access user token
   const token = user.token;
 
   const handleSubmit = async (e) => {
@@ -20,9 +21,10 @@ const Write = () => {
     const headers = { Authorization: `Bearer ${token}` };
 
     try {
+      // send post request + user tokens
       const res = await axios.post("/posts", newPost, { headers });
+      // change route to read new post
       window.location.replace("/post/" + res.data._id);
-      // console.log(res.data._id);
     } catch (error) {
       throw new Error();
     }
