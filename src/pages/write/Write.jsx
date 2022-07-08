@@ -8,6 +8,7 @@ const Write = () => {
   const [title, seTitle] = useState("");
   const [description, setDescription] = useState("");
   const { user } = useSelector((store) => store["loggedIn"]);
+  const token = user.token;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,15 +16,24 @@ const Write = () => {
       title,
       description,
     };
+
+    const headers = { Authorization: `Bearer ${token}` };
+
     try {
-      const res = await axios.post("/posts", newPost);
+      const res = await axios.post("/posts", newPost, { headers });
       console.log(res);
     } catch (error) {
       throw new Error();
     }
   };
 
-  // console.log(user.user.username);
+  // const token = user.data.id; /*take only token and save in token variable*/
+  // axios.get(api , { headers: {"Authorization" : `Bearer ${token}`} })
+  // .then(res => {
+  // console.log(res.data);
+  // .catch((error) => {
+  //   console.log(error)
+  // });
 
   return (
     <>
