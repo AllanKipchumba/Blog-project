@@ -21,7 +21,8 @@ const Write = () => {
 
     try {
       const res = await axios.post("/posts", newPost, { headers });
-      console.log(res);
+      window.location.replace("/post/" + res.data._id);
+      // console.log(res.data._id);
     } catch (error) {
       throw new Error();
     }
