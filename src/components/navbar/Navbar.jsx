@@ -17,32 +17,32 @@ import { useSelector } from "react-redux";
 import { logout } from "../../redux/slices/loginSlice";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+const Buffer = require("buffer").Buffer;
 
 const Navbar = () => {
   const [isMobile, setIsmobile] = useState(false);
   const dispatch = useDispatch();
-  const [profileimage, setProfileImage] = useState(null);
+  // const [profileimage, setProfileImage] = useState(null);
 
   // accesing user state in store
   const state = useSelector((store) => store["loggedIn"]);
   const { user } = state;
-  const { _id } = user.user;
+  // const { _id } = user.user;
 
   const handleClick = () => setIsmobile(false);
 
-  useEffect(() => {
-    const getProfileImage = async () => {
-      try {
-        const res = await axios.get(`/auth/profile/avatar/${_id}`);
-        setProfileImage(res);
-      } catch (error) {
-        throw new Error(error);
-      }
-    };
-    getProfileImage();
-  }, []);
-
-  console.log(profileimage);
+  // useEffect(() => {
+  //   const getProfileImage = async () => {
+  //     try {
+  //       const res = await axios.get(`/auth/profile/avatar/${_id}`);
+  //       // setProfileImage(res.data);
+  //       // console.log(res);
+  //     } catch (error) {
+  //       throw new Error(error);
+  //     }
+  //   };
+  //   getProfileImage();
+  // }, []);
 
   return (
     <>
@@ -90,8 +90,8 @@ const Navbar = () => {
           <span>
             {user ? (
               <Link className="link" to="/settings">
-                {/* <FaUserAlt /> */}
-                <img className="topimg" src={profileimage} alt="img" />
+                <FaUserAlt />
+                {/* <img className="topimg" src={profileimage} alt="img" /> */}
               </Link>
             ) : (
               <ul className="topList">
