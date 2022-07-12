@@ -17,6 +17,8 @@ const SinglePost = () => {
   const [owner, setOwner] = useState("");
   const { user } = useSelector((store) => store["loggedIn"]);
 
+  const [tooltip, showTooltip] = useState(true);
+
   // get individual posts by ID
   useEffect(() => {
     const fetchPost = async () => {
@@ -67,10 +69,17 @@ const SinglePost = () => {
                   onClick={deletePost}
                   data-tip
                   data-for="deletePost"
+                  onMouseEnter={() => showTooltip(true)}
+                  onMouseLeave={() => {
+                    showTooltip(false);
+                    setTimeout(() => showTooltip(true), 50);
+                  }}
                 />
-                <ReactTooltip id="deletePost" place="top" effect="solid">
-                  Delete post
-                </ReactTooltip>
+                {tooltip && (
+                  <ReactTooltip id="deletePost" place="top" effect="solid">
+                    Delete post
+                  </ReactTooltip>
+                )}
               </div>
             )}
           </h1>
