@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import ReactTooltip from "react-tooltip";
 
 const SinglePost = () => {
   // access post id
@@ -26,15 +27,19 @@ const SinglePost = () => {
     fetchPost();
   }, [path]);
 
-  // delete post
-  const handleDelete = async () => {
-    try {
-      const token = user.token;
-      const headers = { Authorization: `Bearer ${token}` };
+  const token = user.token;
+  const headers = { Authorization: `Bearer ${token}` };
 
-      // send Bearer tokens along with axios
-      axios.delete("/posts/" + path, { headers });
-      alert(`Delete ${post.title}`);
+  // delete post
+  const deletePost = async () => {
+    try {
+      // notify user of the deletion
+      if (window.confirm(`Delete ${post.title}?`)) {
+        // send Bearer tokens along with axios
+        axios.delete("/posts/" + path, { headers });
+      } else {
+        return false;
+      }
 
       // redirect to home page
       window.location.replace("/posts");
@@ -43,6 +48,9 @@ const SinglePost = () => {
     }
   };
 
+  // update Post
+  const updatePost = async () => {};
+
   return (
     <>
       <div className="single-post">
@@ -50,14 +58,23 @@ const SinglePost = () => {
           {post.photo && <img src={post.photo} alt="/" className="image" />}
           <h1>
             {post.title}
-            {/* rendr edit and delete icons if post owner is the current user in state */}
+            {/* render edit and delete icons if post owner is the current user in state */}
             {owner === user?.user.username && (
               <div className="edit-btns">
-                <FiEdit className="icon" />
-                <BsTrash className="icon" onClick={handleDelete} />
+                <FiEdit className="icon" onClick={updatePost} />
+                <BsTrash
+                  className="icon"
+                  onClick={deletePost}
+                  data-tip
+                  data-for="deletePost"
+                />
+                <ReactTooltip id="deletePost" place="top" effect="solid">
+                  Delete post
+                </ReactTooltip>
               </div>
             )}
           </h1>
+
           <div className="post-info">
             <Link to={`/?author=${owner}`}>
               <span>
