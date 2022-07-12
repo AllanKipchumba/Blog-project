@@ -22,27 +22,12 @@ const Buffer = require("buffer").Buffer;
 const Navbar = () => {
   const [isMobile, setIsmobile] = useState(false);
   const dispatch = useDispatch();
-  // const [profileimage, setProfileImage] = useState(null);
 
   // accesing user state in store
   const state = useSelector((store) => store["loggedIn"]);
   const { user } = state;
-  // const { _id } = user.user;
 
   const handleClick = () => setIsmobile(false);
-
-  // useEffect(() => {
-  //   const getProfileImage = async () => {
-  //     try {
-  //       const res = await axios.get(`/auth/profile/avatar/${_id}`);
-  //       // setProfileImage(res.data);
-  //       // console.log(res);
-  //     } catch (error) {
-  //       throw new Error(error);
-  //     }
-  //   };
-  //   getProfileImage();
-  // }, []);
 
   return (
     <>

@@ -5,6 +5,7 @@ import { BsTrash } from "react-icons/bs";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const SinglePost = () => {
   // access post id
@@ -14,10 +15,13 @@ const SinglePost = () => {
   const [post, setPost] = useState({});
   const [owner, setOwner] = useState("");
 
+  const { user } = useSelector((store) => store["loggedIn"]);
+
+  // const authorName = user.user.username;
+
   useEffect(() => {
     const fetchPost = async () => {
       const response = await axios.get("/posts/" + path);
-      // console.log(response.data.post);
       setPost(response.data.post);
       setOwner(response.data.postOwner);
     };
@@ -30,10 +34,12 @@ const SinglePost = () => {
           {post.photo && <img src={post.photo} alt="/" className="image" />}
           <h1>
             {post.title}
-            <div className="edit-btns">
-              <FiEdit className="icon" />
-              <BsTrash className="icon" />
-            </div>
+            {owner === user?.user.username && (
+              <div className="edit-btns">
+                <FiEdit className="icon" />
+                <BsTrash className="icon" />
+              </div>
+            )}
           </h1>
           <div className="post-info">
             <Link to={`/?author=${owner}`}>
