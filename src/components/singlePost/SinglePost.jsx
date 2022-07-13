@@ -16,7 +16,6 @@ const SinglePost = () => {
   const [post, setPost] = useState({});
   const [owner, setOwner] = useState("");
   const { user } = useSelector((store) => store["loggedIn"]);
-
   const [tooltip, showTooltip] = useState(true);
 
   // get individual posts by ID
@@ -63,10 +62,21 @@ const SinglePost = () => {
             {/* render edit and delete icons if post owner is the current user in state */}
             {owner === user?.user.username && (
               <div className="edit-btns">
-                <FiEdit className="icon" onClick={updatePost} />
+                <FiEdit
+                  className="icon"
+                  onClick={updatePost}
+                  data-tip
+                  data-for="editPost"
+                  onMouseEnter={() => showTooltip(true)}
+                  onMouseLeave={() => {
+                    showTooltip(false);
+                    setTimeout(() => showTooltip(true), 50);
+                  }}
+                />
                 <BsTrash
                   className="icon"
                   onClick={deletePost}
+                  // tooltip props
                   data-tip
                   data-for="deletePost"
                   onMouseEnter={() => showTooltip(true)}
@@ -75,9 +85,16 @@ const SinglePost = () => {
                     setTimeout(() => showTooltip(true), 50);
                   }}
                 />
+                {/* tooltip for delete */}
                 {tooltip && (
                   <ReactTooltip id="deletePost" place="top" effect="solid">
                     Delete post
+                  </ReactTooltip>
+                )}
+                {/* tooltip for edit */}
+                {tooltip && (
+                  <ReactTooltip id="editPost" place="top" effect="solid">
+                    Edit post
                   </ReactTooltip>
                 )}
               </div>
