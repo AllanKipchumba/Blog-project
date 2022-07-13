@@ -53,7 +53,41 @@
                 margin-left: 20px;
                 font-size: 30px;
                 font-weight: 600;
+                text-transform: capitalize;
             }
+        }
+        .singlePostTitleInput {
+            margin: 10px;
+            font-family: "Lora", serif;
+            font-size: 28px;
+            text-align: center;
+            border: none;
+            color: gray;
+            border-bottom: 1px solid lightgray;
+            //
+            &:focus {
+                outline: none;
+            }
+        }
+        .singlePostDescInput {
+            border: none;
+            color: #666;
+            font-size: 18px;
+            line-height: 25px;
+            border-bottom: 1px solid lightgray;
+            //
+            &:focus {
+                outline: none;
+            }
+        }
+        .editButton {
+            width: 100px;
+            border: none;
+            background-color: teal;
+            padding: 5px;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
         }
     }
 }
