@@ -16,11 +16,12 @@ const SinglePost = () => {
   const [post, setPost] = useState({});
   const [owner, setOwner] = useState("");
   const { user } = useSelector((store) => store["loggedIn"]);
+  const token = user.token;
+  const headers = { Authorization: `Bearer ${token}` };
   const [tooltip, showTooltip] = useState(true);
-  //update mode
+  const [updateMode, setUpdateMode] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState();
-  const [updateMode, setUpdateMode] = useState(false);
 
   // get individual posts by ID
   useEffect(() => {
@@ -31,9 +32,6 @@ const SinglePost = () => {
     };
     fetchPost();
   }, [path]);
-
-  const token = user.token;
-  const headers = { Authorization: `Bearer ${token}` };
 
   // delete post
   const deletePost = async () => {
@@ -85,7 +83,7 @@ const SinglePost = () => {
           ) : (
             <h1>
               {post.title}
-              {/* render edit and delete icons if post owner is the current user in state */}
+
               {owner === user?.user.username && (
                 <div className="edit-btns">
                   <FiEdit
@@ -111,13 +109,13 @@ const SinglePost = () => {
                       setTimeout(() => showTooltip(true), 50);
                     }}
                   />
-                  {/* tooltip for delete */}
+
                   {tooltip && (
                     <ReactTooltip id="deletePost" place="top" effect="solid">
                       Delete post
                     </ReactTooltip>
                   )}
-                  {/* tooltip for edit */}
+
                   {tooltip && (
                     <ReactTooltip id="editPost" place="top" effect="solid">
                       Edit post
