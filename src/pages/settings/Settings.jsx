@@ -16,14 +16,8 @@ export const Settings = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const updates = {
-      username,
-      email,
-      password,
-    };
-
     try {
-      const res = await axios.patch("/auth/profile", updates, { headers });
+      const res = await axios.patch("/auth/profile", username, { headers });
       console.log(res);
     } catch (error) {
       console.log(error);
