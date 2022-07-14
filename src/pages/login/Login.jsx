@@ -66,7 +66,7 @@ const Login = () => {
             ref={passwordRef}
           />
 
-          <button type="submit" className="loginButton" disabled={loading}>
+          <button type="submit" className="loginButton">
             Login
           </button>
 

@@ -8,7 +8,7 @@ import axios from "axios";
 export const Settings = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setpassword] = useState("");
+  const [password, setpassword] = useState(null);
   const { user } = useSelector((store) => store["loggedIn"]);
   const token = user.token;
   const headers = { Authorization: `Bearer ${token}` };
